@@ -1,0 +1,28 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "thegalaxyapp": "StartDebugging",
+        "database": "StartWithoutDebugging",
+        "rabbitmq": "StartWithoutDebugging",
+        "thegalaxy-core": "StartDebugging",
+        "thegalaxy-database": "StartDebugging",
+        "thegalaxy-database-pg-admin": "StartWithoutDebugging"
+      }
+    },
+    "Start Many": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "database": "StartWithoutDebugging",
+        "rabbitmq": "StartWithoutDebugging",
+        "thegalaxyapp": "StartDebugging",
+        "thegalaxy-core": "StartDebugging",
+        "thegalaxy-database": "StartDebugging",
+        "thegalaxy-database-pg-admin": "StartWithoutDebugging"
+      }
+    }
+  }
+}

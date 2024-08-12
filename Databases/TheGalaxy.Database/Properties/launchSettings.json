@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TheGalaxyDatabase": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

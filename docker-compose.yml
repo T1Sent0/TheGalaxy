@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  thegalaxyapp:
+    container_name: TheGalaxy
+    image: ${DOCKER_REGISTRY-}thegalaxyback
+    profiles: [web, web1]
+    build:
+      context: .
+      dockerfile: TheGalaxyApp/Dockerfile
+
+  thegalaxy-core:
+    container_name: TheGalaxyCore
+    image: ${DOCKER_REGISTRY:-}thegalaxy-core
+    profiles: [web, web2]
+    build:
+      context: .
+      dockerfile: Core/TheGalaxy.Core/Dockerfile
+    depends_on:
+      - database
+
+  thegalaxy-database:
+    container_name: TheGalaxyDatabase
+    image: ${DOCKER_REGISTRY:-}thegalaxy-database
+    profiles: [web, web3]
+    build:
+      context: .
+      dockerfile: Databases/TheGalaxy.Database/Dockerfile
+    depends_on:
+      - database
+
+  rabbitmq:
+    container_name: Rabbitmq
+    image: rabbitmq:3.8.8-alpine
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  database:
+    container_name: service.database
+    image: postgres
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+
+  thegalaxy-database-pg-admin:
+    container_name: PgAdmin4
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "foregestore@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "L0calPasw0rd"
+      PG_DATABASE: "database"
+    ports:
+      - "16543:80"
+    depends_on:
+      - database
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  db-data:
